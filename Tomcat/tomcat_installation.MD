@@ -22,7 +22,9 @@
    ln -s /opt/apache-tomcat-8.5.35/bin/startup.sh /usr/local/bin/tomcatup
    ln -s /opt/apache-tomcat-8.5.35/bin/shutdown.sh /usr/local/bin/tomcatdown
    tomcatup
+   
    ```
+  
   #### Check point :
 access tomcat application from browser on prot 8080  
  - http://<Public_IP>:8080
@@ -39,10 +41,26 @@ tomcatup
 Access tomcat application from browser on prot 8090  
  - http://<Public_IP>:8090
 
+  Vim into the file and go to the INSERT mode: 
+  # vim /opt/tomcat/webapps/host-manager/META-INF/context.xml
+  Let’s comment the tag < Valve className  …..> with <!-- … -->  
+  Save and quit 
+
+
+
+
 1. now application is accessible on port 8090. but tomcat application doesnt allow to login from browser. changing a default parameter in context.xml does address this issue
    ```sh
    #search for context.xml
    find / -name context.xml
+  
+  Then vim into the file and go to the insert mode:
+  # vim /opt/tomcat/webapps/host-manager/META-INF/context.xml
+  # vim /opt/tomcat/webapps/manager/META-INF/context.xml
+  
+  Save and quit.
+  
+  cd 
    ```
 1. above command gives 3 context.xml files. comment (<!-- & -->) `Value ClassName` field on files which are under webapp directory. 
 After that restart tomcat services to effect these changes
